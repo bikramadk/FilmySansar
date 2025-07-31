@@ -13,12 +13,12 @@ const app = express();
 
 const PORT = process.env.PORT || 5000;
 
-// Middlewares
+
 
 app.use(express.json());
 app.use(cookieParser());
 const corsOptions = {
-origin: [process.env.CLIENT_URL, "http://localhost:5173", "http://localhost:5173/", "https://aiflix-1.onrender.com"],
+origin: [process.env.CLIENT_URL, "http://localhost:5173", "http://localhost:5173/"],
   
   credentials: true
 };
@@ -98,9 +98,9 @@ app.post("/api/login", async (req, res) => {
       return res.status(400).json({ message: "Invalid credentials." });
     }
 
-    // JWT
+    
     if (userDoc) {
-      // jwt.sign(payload, secret, options)
+   
       const token = jwt.sign({ id: userDoc._id }, process.env.JWT_SECRET, {
         expiresIn: "7d",
       });
